@@ -119,7 +119,8 @@ def echo(update: Update, _):
     )
 
 
-updater = Updater(os.getenv("TG_TOKEN"))
+TG_TOKEN = os.getenv("TG_TOKEN")
+updater = Updater(TG_TOKEN)
 
 updater.dispatcher.add_handler(InlineQueryHandler(inline_handler))
 updater.dispatcher.add_handler(MessageHandler(Filters.sticker, echo_sticker))
@@ -128,5 +129,13 @@ updater.dispatcher.add_handler(MessageHandler(Filters.all, echo_usage))
 
 
 if __name__ == "__main__":
-    updater.start_polling()
+    # updater.start_polling()
+    PORT = int(os.getenv("PORT", 8080))
+    APP_NAME = os.getenv("HEROKU_APP_NAME")
+    updater.start_webhook(
+        listen="0.0.0.0",
+        port=PORT,
+        url_path=TG_TOKEN,
+        webhook_url=f"https://{APP_NAME}.herokuapp.com/{TG_TOKEN}",
+    )
     updater.idle()
