@@ -31,11 +31,7 @@ def load_db() -> dict[tuple[str, str], tuple[str]]:
     with open("stickers.csv", "r") as f:
         reader = csv.DictReader(f, ["id", "sticker_file_id"], restkey="search_tags")
         first_line = next(reader)
-        if first_line != {
-            "id": "id",
-            "sticker_file_id": "sticker_file_id",
-            "search_tags": ["search_tags"],
-        }:
+        if first_line.get("id") != "id":
             f.seek(0)
 
         return {
