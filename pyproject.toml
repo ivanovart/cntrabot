@@ -5,7 +5,7 @@ description = ""
 authors = ["Artem Ivanov <ivart@ivart.xyz>"]
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "3.9.10"
 python-telegram-bot = "^13.11"
 fuzzywuzzy = "^0.18.0"
 python-Levenshtein = "^0.12.2"
